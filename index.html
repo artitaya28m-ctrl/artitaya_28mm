@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mind | Personal Portfolio</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --red: #ff3030;
+            --red-dark: #b91c1c;
+            --bg: #090909;
+            --card: #151515;
+            --text: #f5f5f5;
+            --muted: #a3a3a3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Kanit', Tahoma, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(9, 9, 9, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #252525;
+        }
+
+        .nav-inner {
+            min-height: 75px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d4d4d4;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 620px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 45px;
+            padding-top: 60px;
+            padding-bottom: 70px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 15px;
+            border: 1px solid #702020;
+            border-radius: 30px;
+            background: #210d0d;
+            color: #ff7777;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 68px);
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: var(--red);
+            text-shadow: 0 0 30px #ff303044;
+        }
+
+        .hero h2 {
+            font-size: 22px;
+            font-weight: 400;
+            color: #d4d4d4;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 520px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--red);
+            border: 1px solid var(--red);
+            color: white;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--red);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: #444;
+            margin-left: 10px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--red);
+        }
+
+        /* Profile photo */
+        .photo-wrap {
+            position: relative;
+            width: min(100%, 350px);
+            margin: auto;
+        }
+
+        .photo-wrap::before {
+            content: "";
+            position: absolute;
+            inset: -12px;
+            border: 2px solid var(--red);
+            border-radius: 25px;
+            transform: rotate(5deg);
+            opacity: 0.7;
+        }
+
+        .profile-photo {
+            position: relative;
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 20px;
+            background: #1c1c1c;
+            border: 1px solid #333;
+        }
+
+        .photo-label {
+            position: absolute;
+            bottom: 18px;
+            left: 18px;
+            right: 18px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(10px);
+            border-left: 3px solid var(--red);
+            z-index: 2;
+        }
+
+        .photo-label strong {
+            display: block;
+            color: white;
+        }
+
+        .photo-label span {
+            font-size: 13px;
+            color: #bbb;
+        }
+
+        /* Sections */
+        section.content-section {
+            padding: 85px 0;
+            border-top: 1px solid #222;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-heading .small-title {
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 13px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            margin-top: 5px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .about-card {
+            background: linear-gradient(135deg, #191919, #101010);
+            border: 1px solid #292929;
+            border-radius: 18px;
+            padding: 35px;
+            text-align: center;
+        }
+
+        .about-card p {
+            max-width: 750px;
+            margin: auto;
+            color: #c4c4c4;
+        }
+
+        .about-card strong {
+            color: var(--red);
+        }
+
+        /* Education */
+        .education-card {
+            max-width: 750px;
+            margin: auto;
+            display: flex;
+            gap: 22px;
+            align-items: flex-start;
+            padding: 28px;
+            background: var(--card);
+            border: 1px solid #292929;
+            border-left: 4px solid var(--red);
+            border-radius: 14px;
+        }
+
+        .education-icon {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            display: grid;
+            place-items: center;
+            background: #351010;
+            border-radius: 12px;
+            font-size: 28px;
+        }
+
+        .education-card h3 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .education-card p {
+            color: var(--muted);
+        }
+
+        .education-card .major {
+            color: #ff7777;
+            margin-top: 5px;
+        }
+
+        /* Interests */
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .interest-card {
+            padding: 30px 20px;
+            background: var(--card);
+            border: 1px solid #292929;
+            border-radius: 16px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--red);
+            box-shadow: 0 10px 35px #ff303018;
+        }
+
+        .interest-icon {
+            width: 75px;
+            height: 75px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 18px;
+            background: #2b1010;
+            border-radius: 50%;
+            font-size: 35px;
+        }
+
+        .interest-card h3 {
+            margin-bottom: 8px;
+            font-size: 21px;
+        }
+
+        .interest-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* Goal */
+        .goal-box {
+            max-width: 750px;
+            margin: auto;
+            padding: 35px;
+            border: 1px solid #482020;
+            background: linear-gradient(135deg, #211010, #111111);
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .goal-box h3 {
+            color: #ff7777;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .goal-box p {
+            color: #ccc;
+        }
+
+        /* Contact */
+        .contact-box {
+            text-align: center;
+            padding: 40px 25px;
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 18px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            margin-bottom: 25px;
+        }
+
+        footer {
+            padding: 25px 15px;
+            text-align: center;
+            border-top: 1px solid #252525;
+            color: #777;
+            font-size: 13px;
+        }
+
+        footer span {
+            color: var(--red);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .nav-inner {
+                flex-direction: column;
+                padding: 12px 0;
+                gap: 5px;
+            }
+
+            .nav-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 8px 18px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 45px;
+                padding-top: 50px;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .photo-wrap {
+                width: min(75%, 300px);
+            }
+
+            .interest-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section.content-section {
+                padding: 60px 0;
+            }
+
+            .about-card {
+                padding: 25px 20px;
+            }
+
+            .education-card {
+                padding: 22px 17px;
+                gap: 15px;
+            }
+
+            .education-card h3 {
+                font-size: 18px;
+            }
+
+            .btn {
+                padding: 10px 17px;
+                font-size: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- เมนูเว็บไซต์ -->
+    <nav>
+        <div class="container nav-inner">
+            <a href="#home" class="logo">MIND<span>.</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#home">หน้าแรก</a></li>
+                <li><a href="#about">เกี่ยวกับฉัน</a></li>
+                <li><a href="#education">การศึกษา</a></li>
+                <li><a href="#interests">งานอดิเรก</a></li>
+                <li><a href="#contact">ติดต่อ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- หน้าแนะนำตัว -->
+    <header class="container hero" id="home">
+
+        <div class="hero-text">
+            <span class="tag">WELCOME TO MY PORTFOLIO</span>
+
+            <h1>สวัสดีค่ะ<br>ฉันชื่อ <span>อาทิตยา</span></h1>
+
+            <h2>มายด์ | นักศึกษาคอมพิวเตอร์ศึกษา</h2>
+
+            <p>
+                ยินดีต้อนรับเข้าสู่เว็บไซต์แนะนำตัวของมายด์
+                พื้นที่เล็ก ๆ ที่รวบรวมเรื่องราว ความสนใจ
+                และตัวตนของฉันไว้ในที่เดียว
+            </p>
+
+            <a href="#about" class="btn">รู้จักฉันมากขึ้น ↘</a>
+            <a href="#interests" class="btn btn-outline">
+                สิ่งที่ฉันชอบ
+            </a>
+        </div>
+
+        <div class="photo-wrap">
+            <!-- นำรูปของตัวเองมาตั้งชื่อ photo.jpg -->
+            <img
+                src="https://instagram.fbkk13-3.fna.fbcdn.net/v/t51.82787-15/833411917_18107739953627337_5284249230633242091_n.heic?stp=dst-jpg_e35_tt6&_nc_cat=110&_nc_map=urlgen_bucketless&ig_cache_key=NDAwMDQ2ODAyNjA0NjUwMzg5Mg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=7B3I-hPjBFgQ7kNvwEfRlBH&_nc_oc=AdoKX12lQMg_R4cwauoGFEmFfWMr7jQnxPCcuCO4-cB_zfsu8zxDQh9d52wbhwegdSI&_nc_zt=23&_nc_ht=instagram.fbkk13-3.fna&_nc_gid=qePf4G0BIWunoBBFu9j_Rg&_nc_ss=7baaf&oh=00_AQP5Lb2AVfnagrYpk5dP_q6iPhEE-5nsuNwNHQc2_KwcJQ&oe=6ACBA5BB"
+                alt="รูปโปรไฟล์ของอาทิตยา กวางอิน"
+                class="profile-photo"
+            >
+
+            <div class="photo-label">
+                <strong>อาทิตยา กวางอิน (มายด์)</strong>
+                <span>Computer Education Student</span>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- เกี่ยวกับฉัน -->
+        <section class="content-section" id="about">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="small-title">ABOUT ME</span>
+                    <h2>เกี่ยวกับฉัน</h2>
+                    <p>มาทำความรู้จักฉันให้มากขึ้น</p>
+                </div>
+
+                <div class="about-card">
+                    <p>
+                        สวัสดีค่ะ ฉันชื่อ <strong>อาทิตยา กวางอิน</strong>
+                        ชื่อเล่น <strong>มายด์</strong>
+                        เป็นนักศึกษาที่มีความสนใจในด้านคอมพิวเตอร์
+                        และเทคโนโลยี ฉันชอบเรียนรู้สิ่งใหม่ ๆ
+                        ชอบเก็บภาพความทรงจำผ่านการถ่ายรูป
+                        ออกไปท่องเที่ยวเพื่อเปิดประสบการณ์
+                        และร้องเพลงในเวลาว่าง
+                        ฉันเชื่อว่าทุกประสบการณ์เป็นโอกาส
+                        ให้เราได้เรียนรู้และพัฒนาตัวเองอยู่เสมอ
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ประวัติการศึกษา -->
+        <section class="content-section" id="education">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="small-title">EDUCATION</span>
+                    <h2>ประวัติการศึกษา</h2>
+                    <p>เส้นทางการเรียนรู้ของฉัน</p>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">🎓</div>
+
+                    <div>
+                        <h3>มหาวิทยาลัยราชภัฏอุตรดิตถ์</h3>
+                        <p>ระดับมหาวิทยาลัย</p>
+                        <p class="major">สาขาวิชาคอมพิวเตอร์ศึกษา</p>
+                        <p>
+                            มุ่งมั่นเรียนรู้และพัฒนาความสามารถ
+                            เพื่อนำความรู้ไปต่อยอดในอนาคต
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ความสนใจ -->
+        <section class="content-section" id="interests">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="small-title">MY INTERESTS</span>
+                    <h2>สิ่งที่ฉันชอบ</h2>
+                    <p>ความสุขเล็ก ๆ ที่ทำให้ทุกวันมีสีสัน</p>
+                </div>
+
+                <div class="interest-grid">
+
+                    <article class="interest-card">
+                        <div class="interest-icon">📸</div>
+                        <h3>ถ่ายรูป</h3>
+                        <p>
+                            ชอบบันทึกภาพความทรงจำ
+                            และเก็บรายละเอียดสวย ๆ
+                            รอบตัวผ่านเลนส์กล้อง
+                        </p>
+                    </article>
+
+                    <article class="interest-card">
+                        <div class="interest-icon">🌍</div>
+                        <h3>ท่องเที่ยว</h3>
+                        <p>
+                            ชอบออกไปพบเจอสถานที่ใหม่ ๆ
+                            สัมผัสธรรมชาติ
+                            และเรียนรู้ประสบการณ์ใหม่
+                        </p>
+                    </article>
+
+                    <article class="interest-card">
+                        <div class="interest-icon">🎤</div>
+                        <h3>ร้องเพลง</h3>
+                        <p>
+                            ชอบฟังเพลงและร้องเพลง
+                            เพื่อผ่อนคลาย
+                            และเติมพลังให้กับตัวเอง
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- เป้าหมาย -->
+        <section class="content-section" id="goal">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="small-title">MY GOAL</span>
+                    <h2>เป้าหมายของฉัน</h2>
+                </div>
+
+                <div class="goal-box">
+                    <h3>เติบโตและพัฒนาตัวเอง ✨</h3>
+                    <p>
+                        ฉันตั้งใจพัฒนาความรู้ด้านคอมพิวเตอร์
+                        และเทคโนโลยีอย่างต่อเนื่อง
+                        พร้อมเปิดรับประสบการณ์ใหม่ ๆ
+                        เพื่อสร้างผลงานที่มีคุณค่า
+                        และนำความสามารถของตัวเองไปใช้ให้เกิดประโยชน์
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ติดต่อ -->
+        <section class="content-section" id="contact">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="small-title">CONTACT</span>
+                    <h2>ขอบคุณที่เข้ามารู้จักกัน</h2>
+                    <p>แล้วพบกันใหม่นะคะ ❤️</p>
+                </div>
+
+                <div class="contact-box">
+                    <p>
+                        สามารถเพิ่มช่องทางติดต่อของคุณ
+                        เช่น Facebook, Instagram หรืออีเมล
+                        ได้ในส่วนนี้
+                    </p>
+
+                    <!-- เปลี่ยน URL เป็นบัญชีของตัวเองก่อนใช้งาน -->
+                    <a
+                        href="https://www.instagram.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn"
+                    >
+                        Instagram ↗
+                    </a>
+
+                    <a
+                        href="https://www.facebook.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-outline"
+                    >
+                        Facebook ↗
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            © 2026 <span>Mind Portfolio</span> |
+            Designed with ❤️ by Mind
+        </p>
+    </footer>
+
+</body>
+</html>
